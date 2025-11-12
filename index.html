@@ -1,20 +1,34 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Olber – Ilova haqida</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olber – About & Help</title>
   <style>
+    :root {
+      --bg: #f9fafb;
+      --text: #222;
+      --card: #fff;
+      --accent: #007bff;
+    }
+
+    body.dark {
+      --bg: #0f172a;
+      --text: #e2e8f0;
+      --card: #1e293b;
+      --accent: #38bdf8;
+    }
+
     body {
-      font-family: "Poppins", sans-serif;
-      background-color: #f9fafb;
       margin: 0;
-      color: #222;
-      line-height: 1.6;
+      font-family: "Poppins", sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      transition: all 0.3s ease;
     }
 
     header {
-      background: linear-gradient(135deg, #007bff, #00b4d8);
+      background: linear-gradient(135deg, var(--accent), #00b4d8);
       color: white;
       text-align: center;
       padding: 2rem 1rem;
@@ -27,24 +41,75 @@
       font-size: 2rem;
     }
 
-    header p {
-      margin: 0.3rem 0 0;
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    nav button {
+      background: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
       font-size: 1rem;
-      opacity: 0.9;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--accent);
+      transition: 0.3s;
+    }
+
+    body.dark nav button {
+      background: var(--card);
+      color: var(--accent);
+    }
+
+    nav button.active {
+      background: var(--accent);
+      color: white;
+    }
+
+    .dark-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: white;
+      color: var(--accent);
+      border: none;
+      border-radius: 10px;
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    body.dark .dark-toggle {
+      background: var(--card);
+      color: var(--accent);
     }
 
     main {
-      max-width: 800px;
+      max-width: 850px;
       margin: 2rem auto;
       padding: 1.5rem;
-      background: white;
+      background: var(--card);
       border-radius: 20px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: background 0.3s ease;
+    }
+
+    section {
+      display: none;
+    }
+
+    section.active {
+      display: block;
     }
 
     h2 {
-      color: #007bff;
-      border-left: 4px solid #007bff;
+      color: var(--accent);
+      border-left: 4px solid var(--accent);
       padding-left: 10px;
     }
 
@@ -53,7 +118,7 @@
     }
 
     a {
-      color: #007bff;
+      color: var(--accent);
       text-decoration: none;
     }
 
@@ -66,12 +131,15 @@
       padding: 1rem;
       font-size: 0.9rem;
       color: #777;
-      margin-top: 2rem;
     }
 
     @media (max-width: 600px) {
       header h1 {
         font-size: 1.5rem;
+      }
+      nav button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
       }
       main {
         margin: 1rem;
@@ -80,21 +148,24 @@
   </style>
 </head>
 <body>
+  <button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark</button>
+
   <header>
     <h1>Olber – versiya 1.0.0</h1>
     <p>Professional e’lonlar va savdo platformasi</p>
+    <nav>
+      <button id="aboutBtn" class="active" onclick="showSection('about')">About</button>
+      <button id="helpBtn" onclick="showSection('help')">Help</button>
+    </nav>
   </header>
 
   <main>
-    <section>
+    <!-- ABOUT -->
+    <section id="about" class="active">
       <h2>Ilova haqida</h2>
-      <p>
-        <strong>Olber</strong> – bu sizga o‘z mahsulotlaringiz va xizmatlaringizni tez va qulay tarzda e’lon qilish, xarid qilish va sotish imkonini beruvchi professional platforma.
-        Foydalanuvchilar e’lon joylashtirib, mahsulotlarini keng auditoriyaga taqdim etishlari, boshqa foydalanuvchilarning e’lonlarini ko‘rib, tezkor xarid-sotuv amalga oshirishlari mumkin.
-      </p>
-    </section>
+      <p><strong>Olber</strong> – bu sizga o‘z mahsulotlaringiz va xizmatlaringizni tez va qulay tarzda e’lon qilish, xarid qilish va sotish imkonini beruvchi professional platforma.</p>
+      <p>Foydalanuvchilar e’lon joylashtirib, mahsulotlarini keng auditoriyaga taqdim etishlari, boshqa foydalanuvchilarning e’lonlarini ko‘rib, tezkor xarid-sotuv amalga oshirishlari mumkin.</p>
 
-    <section>
       <h2>Akkount ochish</h2>
       <ul>
         <li>E’lonlarini boshqarish va kuzatish</li>
@@ -102,15 +173,11 @@
         <li>Shaxsiy sozlamalarni o‘rnatish</li>
         <li>Platformada xavfsiz va ishonchli savdo qilish</li>
       </ul>
-    </section>
 
-    <section>
       <h2>Sayt va qo‘llab-quvvatlash</h2>
       <p>Rasmiy sayt: <a href="https://olber.uz">https://olber.uz</a></p>
       <p>Qo‘llab-quvvatlash: <a href="https://olber.uz/support">https://olber.uz/support</a></p>
-    </section>
 
-    <section>
       <h2>Bizning xizmatlarimiz</h2>
       <ul>
         <li>Mahsulot va xizmatlar uchun e’lonlar yaratish va boshqarish</li>
@@ -118,22 +185,65 @@
         <li>Xavfsiz va qulay savdo jarayonini ta’minlash</li>
         <li>Yangiliklar, maxsus takliflar va aksiyalar haqida ma’lumot</li>
       </ul>
-    </section>
 
-    <section>
       <h2>Kontakt</h2>
       <p>Email: <a href="mailto:pragramist07@gmail.com">pragramist07@gmail.com</a></p>
       <p>Telegram: <a href="https://t.me/mobilee_developer">@mobilee_developer</a></p>
-    </section>
 
-    <section>
       <h2>Huquqiy ma’lumotlar</h2>
       <p>Mualliflik huquqi: © 2025 Olber. Barcha huquqlar himoyalangan.</p>
+    </section>
+
+    <!-- HELP -->
+    <section id="help">
+      <h2>Yordam markazi</h2>
+      <p>Agar sizda savollar bo‘lsa yoki texnik muammo yuzaga kelsa, quyidagi yo‘nalishlardan foydalaning:</p>
+
+      <h2>Tez-tez so‘raladigan savollar (FAQ)</h2>
+      <ul>
+        <li><strong>Qanday e’lon joylashtiraman?</strong> – “Yangi e’lon” tugmasini bosing, kerakli ma’lumotlarni kiriting va tasdiqlang.</li>
+        <li><strong>Akkauntimni qanday o‘chiraman?</strong> – Profil sozlamalariga kiring va “Akkauntni o‘chirish” bo‘limini tanlang.</li>
+        <li><strong>Parolni unutdim, nima qilay?</strong> – “Parolni tiklash” funksiyasi orqali elektron pochtangizga tiklash havolasini yuboriladi.</li>
+      </ul>
+
+      <h2>Aloqa</h2>
+      <p>Qo‘llab-quvvatlash jamoamiz sizga 24/7 yordam beradi:</p>
+      <p>Email: <a href="mailto:pragramist07@gmail.com">pragramist07@gmail.com</a></p>
+      <p>Telegram: <a href="https://t.me/mobilee_developer">@mobilee_developer</a></p>
+
+      <h2>Qo‘shimcha ma’lumot</h2>
+      <p>Ko‘proq ma’lumot uchun tashrif buyuring: <a href="https://olber.uz/support">https://olber.uz/support</a></p>
     </section>
   </main>
 
   <footer>
     <p>© 2025 Olber – E’lonlar platformasi</p>
   </footer>
+
+  <script>
+    const aboutBtn = document.getElementById('aboutBtn');
+    const helpBtn = document.getElementById('helpBtn');
+    const aboutSection = document.getElementById('about');
+    const helpSection = document.getElementById('help');
+
+    function showSection(section) {
+      if (section === 'about') {
+        aboutSection.classList.add('active');
+        helpSection.classList.remove('active');
+        aboutBtn.classList.add('active');
+        helpBtn.classList.remove('active');
+      } else {
+        helpSection.classList.add('active');
+        aboutSection.classList.remove('active');
+        helpBtn.classList.add('active');
+        aboutBtn.classList.remove('active');
+      }
+      window.scrollTo(0, 0);
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+    }
+  </script>
 </body>
 </html>
