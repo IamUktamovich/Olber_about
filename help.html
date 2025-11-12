@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olber – Yordam markazi</title>
+  <style>
+    :root {
+      --bg: #f9fafb;
+      --text: #222;
+      --card: #fff;
+      --accent: #007bff;
+    }
+    body.dark {
+      --bg: #0f172a;
+      --text: #e2e8f0;
+      --card: #1e293b;
+      --accent: #38bdf8;
+    }
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: 0.3s;
+    }
+    header {
+      background: linear-gradient(135deg, var(--accent), #00b4d8);
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+      position: relative;
+    }
+    header h1 { margin: 0; font-size: 2rem; }
+    nav {
+      display: flex; justify-content: center; gap: 1rem; margin-top: 1rem;
+    }
+    nav a {
+      text-decoration: none;
+      background: white;
+      color: var(--accent);
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    body.dark nav a { background: var(--card); color: var(--accent); }
+    nav a.active { background: var(--accent); color: white; }
+    .dark-toggle {
+      position: absolute;
+      top: 20px; right: 20px;
+      background: white;
+      color: var(--accent);
+      border: none;
+      border-radius: 10px;
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    body.dark .dark-toggle { background: var(--card); color: var(--accent); }
+    main {
+      max-width: 850px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: var(--card);
+      border-radius: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h2 { color: var(--accent); border-left: 4px solid var(--accent); padding-left: 10px; }
+    ul { padding-left: 20px; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    footer { text-align: center; padding: 1rem; font-size: 0.9rem; color: #777; }
+    @media (max-width:600px){
+      header h1{font-size:1.5rem;}
+      nav a{padding:0.4rem 0.8rem;font-size:0.9rem;}
+      main{margin:1rem;}
+    }
+  </style>
+</head>
+<body>
+  <button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark</button>
+  <header>
+    <h1>Olber – Yordam markazi</h1>
+    <p>Qo‘llab-quvvatlash va yordam sahifasi</p>
+    <nav>
+      <a href="about.html">About</a>
+      <a href="help.html" class="active">Help</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Yordam markazi</h2>
+    <p>Agar sizda savollar bo‘lsa yoki texnik muammo yuzaga kelsa, quyidagi yo‘nalishlardan foydalaning:</p>
+
+    <h2>Tez-tez so‘raladigan savollar (FAQ)</h2>
+    <ul>
+      <li><strong>Qanday e’lon joylashtiraman?</strong> – “Yangi e’lon” tugmasini bosing, kerakli ma’lumotlarni kiriting va tasdiqlang.</li>
+      <li><strong>Akkauntimni qanday o‘chiraman?</strong> – Profil sozlamalariga kiring va “Akkauntni o‘chirish” bo‘limini tanlang.</li>
+      <li><strong>Parolni unutdim, nima qilay?</strong> – “Parolni tiklash” funksiyasi orqali elektron pochtangizga tiklash havolasi yuboriladi.</li>
+    </ul>
+
+    <h2>Aloqa</h2>
+    <p>Email: <a href="mailto:pragramist07@gmail.com">pragramist07@gmail.com</a></p>
+    <p>Telegram: <a href="https://t.me/mobilee_developer">@mobilee_developer</a></p>
+  </main>
+
+  <footer>
+    <p>© 2025 Olber – E’lonlar platformasi</p>
+  </footer>
+
+  <script>
+    function toggleDarkMode(){
+      document.body.classList.toggle('dark');
+      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+    }
+    if(localStorage.getItem('theme') === 'dark'){
+      document.body.classList.add('dark');
+    }
+  </script>
+</body>
+</html>
